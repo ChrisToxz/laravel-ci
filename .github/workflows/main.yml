@@ -24,5 +24,13 @@ jobs:
           docker compose pull
           docker compose up -d --build
 
+      - name: Install Composer Dependencies
+        run: docker exec laravel_app composer install --no-dev --optimize-autoloader
+
+      - name: Fix Permissions
+        run: |
+          docker exec laravel_app chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
+          docker exec laravel_app chmod -R 775 /var/www/storage /var/www/bootstrap/cache
+
       - name: Run Migrations
-        run: docker compose exec -T app php artisan migrate --force
+        run: docker exec -T laravel_app php artisan migrate --force
