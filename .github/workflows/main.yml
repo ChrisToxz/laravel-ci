@@ -25,4 +25,5 @@ jobs:
           docker compose up -d --build
 
       - name: Run Migrations
-        run: docker compose exec -T app php artisan migrate --force
+        run: docker exec laravel_app php artisan migrate --force
+
