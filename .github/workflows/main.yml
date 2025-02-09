@@ -33,4 +33,5 @@ jobs:
           docker exec laravel_app chmod -R 775 /var/www/storage /var/www/bootstrap/cache
 
       - name: Run Migrations
-        run: docker exec -T laravel_app php artisan migrate --force
+        run: docker exec laravel_app php artisan migrate --force
+
